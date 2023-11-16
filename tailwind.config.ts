@@ -51,7 +51,7 @@ const config: Config = {
               700: "#113FAF",
               800: "#0A2C8D",
               900: "#061E75",
-              DEFAULT: "#226FF4",
+              DEFAULT: "#5898F8",
               foreground: "#1f1f1f",
             },
             danger: {

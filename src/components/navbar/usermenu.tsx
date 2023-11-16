@@ -10,6 +10,7 @@ import {
 import { NavbarContent, NavbarItem } from "@nextui-org/navbar";
 import { Link } from "@nextui-org/react";
 import { Session } from "next-auth";
+import { signOut } from "next-auth/react";
 import React from "react";
 
 interface UserMenuProps {
@@ -25,21 +26,32 @@ const UserMenu = ({ session }: UserMenuProps) => {
             <DropdownTrigger>
               <Avatar
                 isBordered
+                // showFallback
                 as="button"
                 className="transition-transform"
                 color="secondary"
-                name="Jason Hughes"
+                name={user?.name || undefined}
                 size="sm"
-                src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+                src={user?.image || ""}
               />
             </DropdownTrigger>
-            <DropdownMenu aria-label="Profile Actions" variant="flat">
-              <DropdownItem key="profile" className="h-14 gap-2">
-                <p className="font-semibold">Signed in as</p>
-                <p className="font-semibold">zoey@example.com</p>
+            <DropdownMenu
+              aria-label="Profile Actions"
+              variant="flat"
+              color="primary"
+            >
+              <DropdownItem key="profile" className="gap-2">
+                <p className="font-semibold">{user.email}</p>
+              </DropdownItem>
+              <DropdownItem key="profile" className="gap-2" href="/blog/new">
+                <p className="font-semibold">New Blog</p>
               </DropdownItem>
 
-              <DropdownItem key="logout" color="danger">
+              <DropdownItem
+                key="logout"
+                color="danger"
+                onClick={() => signOut({ callbackUrl: "/" })}
+              >
                 Log Out
               </DropdownItem>
             </DropdownMenu>
