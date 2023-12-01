@@ -2,11 +2,16 @@
 import { MdEditor } from "md-editor-rt";
 import React, { useState } from "react";
 import "md-editor-rt/lib/style.css";
-import { uploadImagesToTemp } from "@/api/imgProcessor";
+import { uploadImagesToTemp } from "@/lib/imgProcessor";
 
-const MkEditor = () => {
-  const [text, setText] = useState("");
-  const [html, setHtml] = useState("");
+interface MkEditorProps {
+  text: string;
+  setText: React.Dispatch<React.SetStateAction<string>>;
+  html: string;
+  setHtml: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const MkEditor = ({ text, setText, html, setHtml }: MkEditorProps) => {
   async function uploadImg(
     files: Array<File>,
     callback: (urls: Array<string>) => void,
@@ -69,7 +74,14 @@ const MkEditor = () => {
       language="en-US"
       theme="light"
       previewTheme="github"
-      toolbarsExclude={["save", "fullscreen", "github"]}
+      toolbarsExclude={[
+        "save",
+        "fullscreen",
+        "github",
+        "mermaid",
+        "task",
+        "katex",
+      ]}
       onHtmlChanged={setHtml}
       onUploadImg={uploadImg}
     />

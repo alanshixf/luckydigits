@@ -46,10 +46,14 @@ model User {
   email              String?              @unique
   emailVerified      DateTime?
   image              String?
+  title              String?
+  aboutMe            String?
   accounts           Account[]
   sessions           Session[]
-  Blog               Blog[]
-  CloudinaryTempFile CloudinaryTempFile[]
+  blog               Blog[]
+  cloudinaryTempFile CloudinaryTempFile[]
+  follower           Follow[]             @relation("follower")
+  followings         Follow[]             @relation("following")
 
   @@map("users")
 }
@@ -66,9 +70,10 @@ model VerificationToken {
 
 model Blog {
   id              String   @id @default(auto()) @map("_id") @db.ObjectId
-  postBy          String?  @db.ObjectId
-  user            User?    @relation(fields: [postBy], references: [id], onDelete: Cascade)
+  postBy          String   @db.ObjectId
+  user            User     @relation(fields: [postBy], references: [id], onDelete: Cascade)
   title           String
+  luckyDigit      Int
   brief           String
   content         String
   renderedContent String
@@ -84,15 +89,28 @@ model Like {
   blogId String @db.ObjectId
   userId String @db.ObjectId
 
+  @@unique([blogId, userId])
   @@map("likes")
 }
 
 model CloudinaryTempFile {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  userId    String?  @db.ObjectId
-  user      User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String   @db.ObjectId
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   imgUrl    String
   createdAt DateTime @default(now())
 
   @@map("cloudinarytempfiles")
+}
+
+model Follow {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  followerId  String   @db.ObjectId
+  follower    User     @relation("follower", fields: [followerId], references: [id], onDelete: Cascade)
+  followingId String   @db.ObjectId
+  following   User     @relation("following", fields: [followingId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+
+  @@unique([followerId, followingId])
+  @@map("follows")
 }

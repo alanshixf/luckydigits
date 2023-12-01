@@ -18,6 +18,8 @@ const config: Config = {
   },
   darkMode: "class",
   plugins: [
+    require("@tailwindcss/typography"),
+    require("@tailwindcss/aspect-ratio"),
     nextui({
       addCommonColors: true,
       prefix: "LKC",
@@ -25,10 +27,10 @@ const config: Config = {
         "lkc-light": {
           extend: "light", // <- inherit default values from light theme
           colors: {
-            background: "#e3e6e6",
+            background: "#edfeec",
             foreground: "#1f1f1f",
             primary: {
-              50: "#DFFCDD",
+              50: "#edfeec",
               100: "#DFFCDD",
               200: "#BDF9BF",
               300: "#98EEA4",

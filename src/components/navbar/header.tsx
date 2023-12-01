@@ -18,8 +18,10 @@ const Header = async () => {
   return (
     <Navbar
       isBordered
-      className="m-auto h-32 min-w-[300px] 
-      max-w-7xl bg-warning-100 p-4 "
+      maxWidth="full"
+      height={"8rem"}
+      className="m-auto min-w-[300px] max-w-[1600px] 
+      bg-warning-100"
     >
       <NavbarContent justify="start">
         <div className="flex flex-col items-center">

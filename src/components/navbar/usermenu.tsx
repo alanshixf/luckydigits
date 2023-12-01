@@ -40,7 +40,7 @@ const UserMenu = ({ session }: UserMenuProps) => {
               variant="flat"
               color="primary"
             >
-              <DropdownItem key="profile" className="gap-2">
+              <DropdownItem key="profile" className="gap-2" href="/profile">
                 <p className="font-semibold">{user.email}</p>
               </DropdownItem>
               <DropdownItem key="profile" className="gap-2" href="/blog/new">
