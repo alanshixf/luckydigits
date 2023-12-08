@@ -41,7 +41,7 @@ const UserMenu = ({ session }: UserMenuProps) => {
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
   };
-  const handleCloseUserMenu = (e: React.MouseEvent) => {
+  const handleCloseUserMenu = (e: any) => {
     setAnchorElUser(null);
     switch (e.target.id) {
       case MENU_ITEM_PROFILE:
