@@ -1,5 +1,4 @@
 import prisma from "@/lib/db/prisma";
-import { User } from "@nextui-org/react";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import React, { cache } from "react";
@@ -8,13 +7,23 @@ import { compileMDX } from "next-mdx-remote/rsc";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeHighlight from "rehype-highlight";
 import rehypeSlug from "rehype-slug";
-import Link from "next/link";
-import { Roboto_Slab, Cormorant } from "next/font/google";
+import { Roboto, Cormorant, Source_Code_Pro } from "next/font/google";
+import "./index.css";
 import Date from "@/components/date";
+import {
+  Avatar,
+  Box,
+  Card,
+  Container,
+  Link,
+  Paper,
+  Typography,
+} from "@mui/material";
+import { grey } from "@mui/material/colors";
 
-const roboto_slab = Roboto_Slab({
+const sourceCodePro = Source_Code_Pro({
   subsets: ["latin"],
-  variable: "--font-roboto-slab",
+  variable: "--font-Source_Code_Pro",
   weight: "400",
   display: "swap",
 });
@@ -72,6 +81,7 @@ const BlogDetail = async ({ params: { id } }: BlogDetailPageProps) => {
   if (!blog) {
     notFound();
   }
+
   const { content, frontmatter } = await compileMDX<{
     title: string;
     tags: string[];
@@ -81,6 +91,7 @@ const BlogDetail = async ({ params: { id } }: BlogDetailPageProps) => {
       parseFrontmatter: true,
       mdxOptions: {
         rehypePlugins: [
+          //@ts-ignore
           rehypeHighlight,
           rehypeSlug,
           [rehypeAutolinkHeadings, { behavior: "wrap" }],
@@ -92,32 +103,72 @@ const BlogDetail = async ({ params: { id } }: BlogDetailPageProps) => {
   // const sanitizedHTML = xss(blog.renderedContent);
 
   const tags = frontmatter.tags.map((tag, i) => (
-    <Link key={i} href={`/tags/${tag}`}>
+    <Link
+      key={i}
+      href={`/tags/${tag}`}
+      underline="always"
+      // fontFamily={roboto.style.fontFamily}
+      sx={{
+        color: "black",
+        bgcolor: grey[200],
+        px: 1,
+        borderRadius: 2,
+        textDecorationColor: grey[500],
+      }}
+    >
       {tag}
     </Link>
   ));
 
   return (
-    <div className="prose  prose-slate flex max-w-full flex-col md:prose-xl md:flex-row">
-      <div className={"flex-1 p-6 " + roboto_slab.className}>
+    <Box
+      sx={{
+        mx: 0,
+        px: { xs: 0, sm: 4 },
+        display: "flex",
+        flexDirection: { xs: "column", md: "row" },
+      }}
+    >
+      <Paper
+        sx={{
+          flexGrow: 0,
+          p: 6,
+          mb: 4,
+          maxWidth: { xs: "100%", md: "calc(100% - 300px)" },
+        }}
+      >
         <Date date={blog.createdAt.toISOString()} />
-        <h1 className={"mb-0 mt-4 text-3xl " + cormorant.className}>
+        <Typography
+          variant="h2"
+          fontFamily={cormorant.style.fontFamily}
+          sx={{ mt: 4 }}
+        >
           {frontmatter.title}
-        </h1>
+        </Typography>
 
-        <article className=" bg-[#e6ffff] p-6">{content}</article>
-        <section>
-          <h3>Related:</h3>
-          <div className="flex flex-row gap-4">{tags}</div>
-        </section>
-      </div>
-      <div className="w-full md:w-80">
-        <User
-          name={blog.user.name}
-          avatarProps={{ src: blog.user.image ? blog.user.image : "" }}
-        ></User>
-      </div>
-    </div>
+        <Box
+          sx={{ display: "block", color: "text.secondary" }}
+          className={sourceCodePro.variable}
+        >
+          {content}
+        </Box>
+
+        <Typography variant="h6">Related:</Typography>
+        <Box sx={{ display: "flex", flexDirection: "row", gap: 2, mt: 1 }}>
+          {tags}
+        </Box>
+      </Paper>
+      <Box
+        sx={{
+          flexGrow: 0,
+          width: { xs: "100%", md: "300px" },
+          p: 2,
+        }}
+      >
+        <Avatar alt={blog.user.name || ""} src={blog.user.image || ""}></Avatar>
+        <Typography>Compiled in 2.4s (2969 modules)</Typography>
+      </Box>
+    </Box>
   );
 };
 

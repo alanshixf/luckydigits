@@ -4,38 +4,26 @@ import { newBlogSubmit } from "@/lib/imgProcessor";
 import MkEditor from "@/components/blog/MkEditor";
 import { Button, Divider, Input, Spacer, Textarea } from "@nextui-org/react";
 import { Spinner } from "@nextui-org/spinner";
-import { getSession } from "next-auth/react";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { FormEvent, useEffect, useState } from "react";
 
 const NewBlog = () => {
   const [text, setText] = useState("");
   const [html, setHtml] = useState("");
-  const [isLogined, setIsLogined] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
-  useEffect(() => {
-    const checkLogin = async () => {
-      const session = await getSession();
-      if (!session) {
-        redirect("/api/auth/signin?callbackUrl=/add-product");
-      } else setIsLogined(true);
-    };
-    checkLogin();
-  }, []);
-
-  if (!isLogined) {
-    return (
-      <div>
-        <Spinner
-          label="Loading..."
-          color="primary"
-          className="flex flex-1 items-center"
-        />
-      </div>
-    );
-  }
+  // if (!isLogined) {
+  //   return (
+  //     <div>
+  //       <Spinner
+  //         label="Loading..."
+  //         color="primary"
+  //         className="flex flex-1 items-center"
+  //       />
+  //     </div>
+  //   );
+  // }
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();

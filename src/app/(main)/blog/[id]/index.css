@@ -1,0 +1,14 @@
+.MuiBox-root p img {
+  max-width: 100%;
+  min-width: 256px;
+  margin: auto;
+}
+
+div pre code {
+  display: block;
+  max-width: fit-content;
+  min-width: 256px;
+  align-self: center;
+  margin: auto;
+  font-family: var(--font-Source_Code_Pro);
+}

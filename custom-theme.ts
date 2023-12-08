@@ -48,41 +48,41 @@ export const myTheme = {
   fg: "#DFFCDD",
 };
 
-.blog {
-  --md-theme-color-reverse: #eee;
-  --md-theme-color-hover: #eee;
-  --md-theme-color-hover-inset: #ddd;
-  --md-theme-link-color: #2d8cf0;
-  --md-theme-link-hover-color: #73d13d;
-  --md-theme-border-color: #e6e6e6;
-  --md-theme-border-color-reverse: #bebebe;
-  --md-theme-border-color-inset: #d6d6d6;
-  /* --md-theme-bg-color: #fff; */
-  /* --md-theme-bg-color-inset: #ececec; */
-  /* --md-theme-bg-color-scrollbar-track: #e2e2e2; */
-  /* --md-theme-bg-color-scrollbar-thumb: rgba(0, 0, 0, .3019607843); */
-  /* --md-theme-bg-color-scrollbar-thumb-hover: rgba(0, 0, 0, .3490196078); */
-  /* --md-theme-bg-color-scrollbar-thumb-active: rgba(0, 0, 0, .3803921569); */
-  /* --md-theme-code-copy-tips-color: inherit; */
-  /* --md-theme-code-copy-tips-bg-color: #fff; */
-  --md-theme-code-inline-color: inherit;
-  --md-theme-code-inline-bg-color: #eff1f2;
-  --md-theme-code-block-color: #747384;
-  --md-theme-code-block-bg-color: #f8f8f8;
-  --md-theme-code-active-color: #61aeee;
-  --md-theme-table-tr-border-color: #d8dee4;
-  --md-theme-table-td-border-color: #d0d7de;
-  --md-theme-quote-color: #57606a;
-  --md-theme-quote-border-color: #d0d7de;
-}
+// .blog {
+//   --md-theme-color-reverse: #eee;
+//   --md-theme-color-hover: #eee;
+//   --md-theme-color-hover-inset: #ddd;
+//   --md-theme-link-color: #2d8cf0;
+//   --md-theme-link-hover-color: #73d13d;
+//   --md-theme-border-color: #e6e6e6;
+//   --md-theme-border-color-reverse: #bebebe;
+//   --md-theme-border-color-inset: #d6d6d6;
+//   /* --md-theme-bg-color: #fff; */
+//   /* --md-theme-bg-color-inset: #ececec; */
+//   /* --md-theme-bg-color-scrollbar-track: #e2e2e2; */
+//   /* --md-theme-bg-color-scrollbar-thumb: rgba(0, 0, 0, .3019607843); */
+//   /* --md-theme-bg-color-scrollbar-thumb-hover: rgba(0, 0, 0, .3490196078); */
+//   /* --md-theme-bg-color-scrollbar-thumb-active: rgba(0, 0, 0, .3803921569); */
+//   /* --md-theme-code-copy-tips-color: inherit; */
+//   /* --md-theme-code-copy-tips-bg-color: #fff; */
+//   --md-theme-code-inline-color: inherit;
+//   --md-theme-code-inline-bg-color: #eff1f2;
+//   --md-theme-code-block-color: #747384;
+//   --md-theme-code-block-bg-color: #f8f8f8;
+//   --md-theme-code-active-color: #61aeee;
+//   --md-theme-table-tr-border-color: #d8dee4;
+//   --md-theme-table-td-border-color: #d0d7de;
+//   --md-theme-quote-color: #57606a;
+//   --md-theme-quote-border-color: #d0d7de;
+// }
 
-.blog {
-  font-family: var(--font-source-code-pro);
-  font-size: 21px !important;
-}
-.blog h1 {
-  font-family: var(--font-cormorant);
-  font-size: 55px !important;
-  font-weight: bold !important;
-  font-style: italic;
-}
+// .blog {
+//   font-family: var(--font-source-code-pro);
+//   font-size: 21px !important;
+// }
+// .blog h1 {
+//   font-family: var(--font-cormorant);
+//   font-size: 55px !important;
+//   font-weight: bold !important;
+//   font-style: italic;
+// }
