@@ -1,0 +1,2 @@
+export const LIMITS = 10;
+export const NULL_OBJECT_ID = "000000000000000000000000";

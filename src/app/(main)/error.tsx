@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import Link from "next/link";
+import { Box, Button, Typography } from "@mui/material";
 
 export default function Error({
   error,
@@ -16,23 +17,33 @@ export default function Error({
   }, [error]);
 
   return (
-    <main className="mx-auto min-h-screen max-w-lg bg-warning-300 px-4 py-1">
-      <h2 className="my-4 text-2xl font-bold">Something went wrong!</h2>
-      <button
-        className="mb-4 rounded-xl bg-danger-500 p-4 text-white"
+    <Box
+      mx={"auto"}
+      minHeight={"100vh"}
+      maxWidth={"32rem"}
+      bgcolor={"warning"}
+      px={"1rem"}
+      py={"0.25rem"}
+    >
+      <Typography variant="h4" my={"1rem"}>
+        Something went wrong!
+      </Typography>
+      <Typography>{error.message}</Typography>
+      <Button
+        sx={{ bgcolor: "danger", mb: "1rem", p: "1rem" }}
         onClick={
           // Attempt to recover by trying to re-render the segment
           () => reset()
         }
       >
         Try again
-      </button>
-      <p className="text-xl">
+      </Button>
+      <Typography variant="h6">
         Or go back to{" "}
         <Link href="/" className="underline">
           Home 🏠
         </Link>
-      </p>
-    </main>
+      </Typography>
+    </Box>
   );
 }

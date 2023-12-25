@@ -1,26 +1,22 @@
 "use client";
 import * as React from "react";
-import { styled, useTheme, Theme, CSSObject } from "@mui/material/styles";
-import Box from "@mui/material/Box";
+import { styled, Theme, CSSObject } from "@mui/material/styles";
 import MuiDrawer from "@mui/material/Drawer";
-import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
-import CssBaseline from "@mui/material/CssBaseline";
-import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
-import zIndex from "@mui/material/styles/zIndex";
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
+import BookSharpIcon from "@mui/icons-material/BookSharp";
+import { Roboto } from "next/font/google";
 
+const roboto = Roboto({
+  subsets: ["latin"],
+  weight: "400",
+  display: "swap",
+});
 const drawerWidth = 240;
 
 const openedMixin = (theme: Theme): CSSObject => ({
@@ -68,18 +64,32 @@ export default function SideBar() {
     setOpen(false);
   };
 
+  const menuItems = [
+    {
+      name: "Profile",
+      icon: <ManageAccountsIcon />,
+      url: "/management/profile",
+    },
+    { name: "My Blogs", icon: <BookSharpIcon />, url: "/management/blog" },
+  ];
+
   return (
     <Drawer variant="permanent" open={open}>
       <Divider />
       <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem key={text} disablePadding sx={{ display: "block", mx: 0 }}>
+        {menuItems.map((item) => (
+          <ListItem
+            key={item.name}
+            disablePadding
+            sx={{ display: "block", mx: 0 }}
+          >
             <ListItemButton
               sx={{
                 minHeight: 48,
                 justifyContent: { sm: "initial", xs: "center" },
                 px: 1,
               }}
+              href={item.url}
             >
               <ListItemIcon
                 sx={{
@@ -87,20 +97,24 @@ export default function SideBar() {
                   justifyContent: "center",
                 }}
               >
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                {item.icon}
               </ListItemIcon>
               <ListItemText
-                primary={text}
+                primary={item.name}
                 sx={{
+                  "& .MuiTypography-root": {
+                    fontFamily: roboto.style.fontFamily,
+                  },
+
                   opacity: { sm: 1, xs: 0 },
                   display: { xs: "none", sm: "block" },
+                  pl: 1,
                 }}
               />
             </ListItemButton>
           </ListItem>
         ))}
       </List>
-      <Divider />
       {/* <List>
           {["All mail", "Trash", "Spam"].map((text, index) => (
             <ListItem key={text} disablePadding sx={{ display: "block" }}>

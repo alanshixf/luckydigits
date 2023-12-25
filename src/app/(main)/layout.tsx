@@ -8,6 +8,7 @@ import { Box, Container, Paper } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import { cookies } from "next/headers";
 import Footer from "@/components/footer/footer";
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
 const roboto_slab = Roboto_Slab({
   subsets: ["latin"],
   variable: "--font-roboto-slab",
@@ -28,42 +29,47 @@ export default function RootLayout({
   const colorMode = cookies().get("LKC_COLOR_MODE")?.value;
   return (
     <html lang="en" suppressHydrationWarning={true}>
-      <body className={roboto_slab.className} style={{ background: "#121212" }}>
-        <ThemeRegistry colorMode={colorMode}>
+      <ThemeRegistry colorMode={colorMode}>
+        <body
+          className={roboto_slab.className}
+          // style={{ background: colorMode === "dark" ? "#121212" : grey[200] }}
+        >
           <SessionProvider>
-            <Container
-              maxWidth={false}
-              disableGutters
-              sx={{
-                margin: "auto",
-                minWidth: "300px",
-                maxWidth: "1600px",
-                minHeight: {
-                  xs: "calc(100vh - 80px)",
-                  sm: "calc(100vh - 128px)",
-                },
-              }}
-            >
-              <Header />
-              <Box
-                display="flex"
-                flexDirection="column"
-                minHeight={{
-                  xs: "calc(100vh - 80px)",
-                  sm: "calc(100vh - 128px)",
+            <AppRouterCacheProvider>
+              <Container
+                maxWidth={false}
+                disableGutters
+                sx={{
+                  margin: "auto",
+                  minWidth: "300px",
+                  maxWidth: "1600px",
+                  minHeight: {
+                    xs: "calc(100vh - 80px)",
+                    sm: "calc(100vh - 128px)",
+                  },
                 }}
-                bgcolor="background.paper"
               >
-                <Box sx={{ flexGrow: 1 }}>{children}</Box>
-                <Footer
-                  title="hello kitty"
-                  description="Lucky Digits funny your life"
-                />
-              </Box>
-            </Container>
+                <Header />
+                <Box
+                  display="flex"
+                  flexDirection="column"
+                  minHeight={{
+                    xs: "calc(100vh - 80px)",
+                    sm: "calc(100vh - 128px)",
+                  }}
+                  bgcolor="background.paper"
+                >
+                  <Box sx={{ flexGrow: 1 }}>{children}</Box>
+                  <Footer
+                    title="hello kitty"
+                    description="Lucky Digits funny your life"
+                  />
+                </Box>
+              </Container>
+            </AppRouterCacheProvider>
           </SessionProvider>
-        </ThemeRegistry>
-      </body>
+        </body>
+      </ThemeRegistry>
     </html>
   );
 }

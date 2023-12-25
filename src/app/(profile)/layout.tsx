@@ -9,6 +9,7 @@ import { grey } from "@mui/material/colors";
 import { cookies } from "next/headers";
 import Footer from "@/components/footer/footer";
 import SideBar from "@/components/navbar/sideBar";
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
 const roboto_slab = Roboto_Slab({
   subsets: ["latin"],
   variable: "--font-roboto-slab",
@@ -37,53 +38,66 @@ export default function RootLayout({
   const colorMode = cookies().get("LKC_COLOR_MODE")?.value;
   return (
     <html lang="en" suppressHydrationWarning={true}>
-      <body className={roboto_slab.className} style={{ background: "#121212" }}>
-        <ThemeRegistry colorMode={colorMode}>
+      <ThemeRegistry colorMode={colorMode}>
+        <body
+          className={roboto_slab.className}
+          // style={{ background: colorMode === "dark" ? "#121212" : grey[200] }}
+        >
           <SessionProvider>
-            <Container
-              maxWidth={false}
-              disableGutters
-              sx={{
-                margin: "auto",
-                minWidth: "300px",
-                maxWidth: "1600px",
-                minHeight: "500px",
-              }}
-            >
-              <Header />
-              <Container
-                maxWidth={false}
-                disableGutters
+            <AppRouterCacheProvider>
+              <Box
                 sx={{
-                  display: "flex",
-                  flexDirection: "row",
                   margin: "auto",
+                  minWidth: "300px",
+                  maxWidth: "1600px",
                   minHeight: "500px",
                 }}
               >
-                <SideBar />
+                <Header />
                 <Box
-                  display="flex"
-                  flexDirection="column"
-                  ml={{ xs: "57px", sm: "240px" }}
-                  height={{
-                    xs: "calc(100vh - 80px)",
-                    sm: "calc(100vh - 128px)",
+                  sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    margin: "auto",
+                    minHeight: "500px",
                   }}
                 >
-                  <Box sx={{ flexGrow: 1, bgcolor: "background.paper" }}>
-                    {children}
+                  <SideBar />
+                  <Box
+                    display="flex"
+                    flexDirection="column"
+                    ml={{ xs: "57px", sm: "240px" }}
+                    maxWidth={{
+                      xs: "calc(100% - 57px)",
+                      sm: "calc(100% - 240px)",
+                    }}
+                    minHeight={{
+                      xs: "calc(100vh - 80px)",
+                      sm: "calc(100vh - 128px)",
+                    }}
+                    flexGrow={1}
+                    bgcolor="background.paper"
+                  >
+                    <Box
+                      maxWidth={"100%"}
+                      sx={{
+                        flexGrow: 1,
+                        bgcolor: "background.paper",
+                      }}
+                    >
+                      {children}
+                    </Box>
+                    <Footer
+                      title="hello kitty"
+                      description="Lucky Digits funny your life"
+                    />
                   </Box>
-                  <Footer
-                    title="hello kitty"
-                    description="Lucky Digits funny your life"
-                  />
                 </Box>
-              </Container>
-            </Container>
+              </Box>
+            </AppRouterCacheProvider>
           </SessionProvider>
-        </ThemeRegistry>
-      </body>
+        </body>
+      </ThemeRegistry>
     </html>
   );
 }

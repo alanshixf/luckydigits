@@ -2,7 +2,7 @@ import { Inter, Roboto_Slab, Cormorant, Roboto } from "next/font/google";
 
 import { createTheme } from "@mui/material/styles";
 import { PaletteMode } from "@mui/material";
-
+import { grey } from "@mui/material/colors";
 const roboto_slab = Roboto_Slab({
   subsets: ["latin"],
   variable: "--font-roboto-slab",
@@ -63,6 +63,9 @@ export const getModePalette = (mode: PaletteMode) => ({
           secondary: {
             main: "#226FF4",
           },
+          background: {
+            default: grey[200],
+          },
         }
       : {
           // palette values for dark mode
@@ -74,6 +77,9 @@ export const getModePalette = (mode: PaletteMode) => ({
           },
           background: {
             paper: "#1c1c1c",
+          },
+          text: {
+            primary: "rgba(255, 255, 255, 0.97)",
           },
         }),
   },

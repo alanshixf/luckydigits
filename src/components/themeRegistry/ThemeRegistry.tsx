@@ -5,10 +5,9 @@ import CssBaseline from "@mui/material/CssBaseline";
 import NextAppDirEmotionCacheProvider from "./EmotionCache";
 import { ThemeContext } from "./themeContextProvider";
 import { getModePalette } from "./theme";
-import { Roboto } from "next/font/google";
+import { Roboto, Roboto_Slab } from "next/font/google";
 import { PaletteMode, useMediaQuery } from "@mui/material";
 import { NextPageContext } from "next";
-import { setCookie } from "@/lib/cookies";
 
 export async function getServerSideProps(context: NextPageContext) {
   const colorModeCookie = context.req?.headers.cookie
@@ -29,6 +28,13 @@ export async function getServerSideProps(context: NextPageContext) {
 const roboto = Roboto({
   subsets: ["latin"],
   variable: "--font-roboto",
+  weight: ["300", "400", "500", "700"],
+  display: "swap",
+});
+
+const roboto_slab = Roboto_Slab({
+  subsets: ["latin"],
+  variable: "--font-roboto-slab",
   weight: ["300", "400", "500", "700"],
   display: "swap",
 });
@@ -55,13 +61,18 @@ export default function ThemeRegistry({
   }, [prefersDarkMode, colorMode]);
 
   const toggleColorMode = () => {
-    setCookie("LKC_COLOR_MODE", mode === "light" ? "dark" : "light");
+    document.cookie = `LKC_COLOR_MODE=${
+      mode === "light" ? "dark" : "light"
+    }; path=/`;
     setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
   };
 
   const theme = React.useMemo(() => {
     return createTheme({
       palette: getModePalette(mode).palette,
+      typography: {
+        fontFamily: roboto_slab.style.fontFamily,
+      },
       components: {
         MuiAlert: {
           styleOverrides: {

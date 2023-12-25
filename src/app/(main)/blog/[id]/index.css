@@ -1,4 +1,4 @@
-.MuiBox-root p img {
+.blog-img {
   max-width: 100%;
   min-width: 256px;
   margin: auto;
@@ -11,4 +11,47 @@ div pre code {
   align-self: center;
   margin: auto;
   font-family: var(--font-Source_Code_Pro);
+}
+
+.blog-content a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+}
+
+.blog-content a:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+}
+
+.blog-content table {
+  border-collapse: collapse;
+  border: 1px solid azure;
+
+  min-width: 50%;
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.blog-content th {
+  background-color: #0f604a;
+  padding: 8px;
+  color: azure;
+}
+
+.blog-content td {
+  padding: 8px;
+  border: 1px solid azure;
+}
+.blog-content tr:nth-child(odd) {
+  background-color: #c5c5c5;
+  color: black;
+}
+.blog-content tr:nth-child(even) {
+  background-color: #5a5a5a;
+  color: azure;
+}
+
+.blog-content tr:hover {
+  background-color: #858585;
 }

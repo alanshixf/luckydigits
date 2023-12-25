@@ -1,0 +1,10 @@
+{
+  "ImageCDNs": [
+    { "hostname": "https://res.cloudinary.com" },
+    { "hostname": "https://lh3.googleusercontent.com" },
+    { "hostname": "https://avatars.githubusercontent.com" },
+    { "hostname": "https://user-images.githubusercontent.com" },
+    { "hostname": "https://s3.amazonaws.com" },
+    { "hostname": "https://www.davegray.codes" }
+  ]
+}

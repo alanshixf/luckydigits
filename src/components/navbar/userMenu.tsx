@@ -23,7 +23,8 @@ import Logout from "@mui/icons-material/Logout";
 import { grey } from "@mui/material/colors";
 import ThemeSwitch from "./themeSwitch";
 import { useRouter } from "next/navigation";
-
+import { stringAvatar } from "@/lib/utils/stringAvatar";
+import BookSharpIcon from "@mui/icons-material/BookSharp";
 interface UserMenuProps {
   session: Session | null;
 }
@@ -31,6 +32,7 @@ interface UserMenuProps {
 const MENU_ITEM_PROFILE = "Profile";
 const MENU_ITEM_LOGOUT = "Logout";
 const MENU_ITEM_NEW_BLOG = "New Blog";
+const MENU_ITEM_MY_BLOG = "My Blog";
 const UserMenu = ({ session }: UserMenuProps) => {
   const user = session?.user;
   const router = useRouter();
@@ -45,10 +47,13 @@ const UserMenu = ({ session }: UserMenuProps) => {
     setAnchorElUser(null);
     switch (e.target.id) {
       case MENU_ITEM_PROFILE:
-        router.push("/profile");
+        router.push("/management/profile");
         break;
       case MENU_ITEM_NEW_BLOG:
-        router.push("/blog/new");
+        router.push("/management/blog/new");
+        break;
+      case MENU_ITEM_MY_BLOG:
+        router.push("/management/blog");
         break;
       case MENU_ITEM_LOGOUT:
         signOut({ callbackUrl: "/" });
@@ -66,17 +71,30 @@ const UserMenu = ({ session }: UserMenuProps) => {
           aria-haspopup="true"
           aria-expanded={anchorElUser ? "true" : undefined}
         >
-          <Avatar
+          {/* <Avatar
             alt={user?.name ? user.name : ""}
             src={user?.image ? user.image : ""}
-          />
+          /> */}
+          {session?.user.image !== null && session?.user.image !== "" ? (
+            <Avatar
+              alt={session?.user.name as string}
+              src={session?.user.image as string}
+            />
+          ) : (
+            <Avatar {...stringAvatar(session?.user.name ?? "NaN", 40)} />
+          )}
         </IconButton>
       </Tooltip>
       <Menu
         id="menu-appbar"
         aria-labelledby="positioned-button"
         anchorEl={anchorElUser}
-        sx={{ mt: "-20px" }}
+        sx={{
+          mt: "-20px",
+          "& .MuiList-root": {
+            pt: 0,
+          },
+        }}
         anchorOrigin={{
           vertical: "top",
           horizontal: "center",
@@ -91,25 +109,23 @@ const UserMenu = ({ session }: UserMenuProps) => {
           sx: {
             overflow: "visible",
             filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
-            mt: 1.5,
+            pt: 0,
             "& .MuiAvatar-root": {
               width: 60,
               height: 60,
-              ml: -0.5,
-              mr: 1,
             },
-            "&:before": {
-              content: '""',
-              display: "block",
-              position: "absolute",
-              top: 0,
-              right: 14,
-              width: 10,
-              height: 10,
-              bgcolor: "background.paper",
-              transform: "translateY(-50%) rotate(45deg)",
-              zIndex: 0,
-            },
+            // "&:before": {
+            //   content: '""',
+            //   display: "block",
+            //   position: "absolute",
+            //   top: 0,
+            //   right: 14,
+            //   width: 10,
+            //   height: 10,
+            //   bgcolor: "background.paper",
+            //   transform: "translateY(-50%) rotate(45deg)",
+            //   zIndex: 0,
+            // },
           },
         }}
         open={Boolean(anchorElUser)}
@@ -123,10 +139,14 @@ const UserMenu = ({ session }: UserMenuProps) => {
               mb: 2,
             }}
           >
-            <Avatar
-              alt={user?.name ? user.name : ""}
-              src={user?.image ? user.image : ""}
-            />
+            {session?.user.image !== null && session?.user.image !== "" ? (
+              <Avatar
+                alt={session?.user.name as string}
+                src={session?.user.image as string}
+              />
+            ) : (
+              <Avatar {...stringAvatar(session?.user.name ?? "NaN", 40)} />
+            )}
           </Box>
           <Typography align="center">{user?.name}</Typography>
           <Typography align="center" fontSize={"12px"} color={grey[500]}>
@@ -147,17 +167,17 @@ const UserMenu = ({ session }: UserMenuProps) => {
           </ListItemIcon>
           Profile
         </MenuItem>
+        <MenuItem onClick={handleCloseUserMenu} id={MENU_ITEM_MY_BLOG}>
+          <ListItemIcon>
+            <BookSharpIcon fontSize="small" />
+          </ListItemIcon>
+          My Blog
+        </MenuItem>
         <MenuItem onClick={handleCloseUserMenu} id={MENU_ITEM_NEW_BLOG}>
           <ListItemIcon>
             <PostAddIcon fontSize="small" />
           </ListItemIcon>
           New Blog
-        </MenuItem>
-        <MenuItem onClick={handleCloseUserMenu}>
-          <ListItemIcon>
-            <Settings fontSize="small" />
-          </ListItemIcon>
-          Settings
         </MenuItem>
         <Divider />
         <MenuItem onClick={handleCloseUserMenu} id={MENU_ITEM_LOGOUT}>

@@ -1,7 +1,6 @@
 "use server";
 import React from "react";
 
-import { getServerSession } from "next-auth";
 import AppBar from "@mui/material/AppBar";
 import { authOptions } from "@/lib/auth-options";
 import UserMenu from "./userMenu";
@@ -16,10 +15,10 @@ import {
 import NavMenu from "./navMenu";
 import SmallScreenNavMenu from "./smallScreenNavMenu";
 import Logo from "./logo";
-import { headers } from "next/headers";
+import getServerSession from "@/lib/getServerSeesion";
 
 const Header = async () => {
-  const session = await getServerSession(authOptions);
+  const session = await getServerSession();
 
   return (
     <AppBar
@@ -70,7 +69,12 @@ const Header = async () => {
               justifyContent: "center",
             }}
           >
-            <Link href="/" color="inherit" underline="none">
+            <Link
+              href="/"
+              color="inherit"
+              underline="none"
+              sx={{ as: "image" }}
+            >
               <Logo size={40} />
             </Link>
           </Box>
@@ -82,7 +86,12 @@ const Header = async () => {
               mr: "10px",
             }}
           >
-            <Link href="/" color="inherit" underline="none">
+            <Link
+              href="/"
+              color="inherit"
+              underline="none"
+              sx={{ as: "image" }}
+            >
               <Logo size={60} />
             </Link>
           </Box>

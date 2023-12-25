@@ -12,7 +12,11 @@ import {
 import React from "react";
 
 function NavMenu() {
-  const pages = ["Products", "Pricing", "Blog"];
+  const pages = [
+    { name: "Products", href: "" },
+    { name: "Pricing", href: "" },
+    { name: "Blog", href: "/blog" },
+  ];
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null,
@@ -29,8 +33,12 @@ function NavMenu() {
   return (
     <Box sx={{ display: "flex" }}>
       {pages.map((page) => (
-        <Button key={page} sx={{ my: 2, color: "white", display: "block" }}>
-          {page}
+        <Button
+          key={page.name}
+          sx={{ my: 2, color: "white", display: "block" }}
+          href={page.href}
+        >
+          {page.name}
         </Button>
       ))}
     </Box>

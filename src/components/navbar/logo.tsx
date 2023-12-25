@@ -20,7 +20,7 @@ function Logo({ size }: LogoProps) {
         alignItems: "center",
       }}
     >
-      <Image src={logo} alt="LKC logo" width={size} height={size} />
+      <Image src={logo} alt="LKC logo" width={size} height={size} priority />
       <Typography
         fontSize={12}
         noWrap

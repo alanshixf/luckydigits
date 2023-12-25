@@ -1,5 +1,4 @@
 import getFormattedDate from "@/lib/utils/getFormattedDate";
-import { Spacer } from "@nextui-org/react";
 import React from "react";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import { Box, Typography } from "@mui/material";
@@ -10,9 +9,8 @@ export default function Date({ date }: DateProps) {
   const pubDate = getFormattedDate(date);
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex", gap: "4" }}>
       <CalendarMonthIcon />
-      <Spacer x={2} />
       <Typography>{pubDate}</Typography>
     </Box>
   );
