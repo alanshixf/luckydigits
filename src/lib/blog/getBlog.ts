@@ -99,7 +99,7 @@ export const getBlog = cache(async (id: string) => {
     });
 
     const LikesQuery = prisma.like.findMany({
-      where: { likedId: id, userId },
+      where: { blogId: id, userId },
     });
     const time1 = Date.now();
     const [user, Images, Likes] = await Promise.all([

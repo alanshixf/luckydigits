@@ -11,7 +11,7 @@ type BlogListItem = {
   createdAt: Date;
   updatedAt: Date;
   Images?: { id: string; url: string; alt: string | null }[];
-  Likes: { id: string }[];
+  Likes: { id: bigint }[];
   _count: { Likes: number; Comments: number };
 };
 

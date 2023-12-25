@@ -17,8 +17,8 @@ async function BlogListPage() {
   const user = session?.user;
   let lastRefreshed = new Date();
   let toShowBlogList: BlogListItemWithUser[] = [];
+  const firsttime = Date.now();
   if (user) {
-    const firsttime = Date.now();
     await setLastRefreshed(user.id, lastRefreshed);
     toShowBlogList = await getNewBlogWithPage(
       1,
@@ -28,13 +28,13 @@ async function BlogListPage() {
       },
       user.id,
     );
-    const secondtime = Date.now();
-    console.log("listTime: " + (secondtime - firsttime));
   } else {
     toShowBlogList = await getNewBlogWithPage(1, LIMITS, {
       updatedAt: { lt: lastRefreshed },
     });
   }
+  const secondtime = Date.now();
+  console.log("listTime: " + (secondtime - firsttime));
   return (
     <Box
       sx={{
